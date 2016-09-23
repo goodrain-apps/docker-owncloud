@@ -1,0 +1,4 @@
+*/1 * * * * root cp -r /var/www/owncloud/data /data/
+*/1 * * * * root cp -r /var/www/owncloud/3rdparty /data/
+*/1 * * * * root cp /var/www/owncloud/config/config.php /data/config.php
+
