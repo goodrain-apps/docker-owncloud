@@ -30,7 +30,7 @@ VOLUME /data
 WORKDIR /var/www/owncloud
 
 COPY owncloud.conf /etc/apache2/sites-available/
-COPY *.sh /usr/local/bin/
+COPY docker-entrypoint.sh /usr/local/bin/
 COPY crontab /etc/cron.d/
 
 RUN rm -rf /etc/apache2/sites-enabled/* \
@@ -38,12 +38,12 @@ RUN rm -rf /etc/apache2/sites-enabled/* \
     && echo "ServerName 0.0.0.0" >> /etc/apache2/apache2.conf \
     && chown -R www-data:www-data /var/www/owncloud/
 
-# 创建数据库owncloud
-RUN service mysql start \
-    && /bin/bash +x /usr/local/bin/owncloud.sh
+#  create owncloud database
+#RUN service mysql start \
+#    && /bin/bash +x /usr/local/bin/owncloud.sh
 
-# 安装owncloud
-RUN sudo -u www-data php occ maintenance:install --database "sqlite" --admin-user "admin" --admin-pass "owncloud"
+# install owncloud
+#RUN sudo -u www-data php occ maintenance:install --database "sqlite" --admin-user "admin" --admin-pass "owncloud"
 #RUN sudo -u www-data php occ maintenance:install --database "mysql" --database-name "owncloud" --database-user "root" --database-pass "5!lovemysql" --admin-user "admin" --admin-pass "owncloud"
 
 #EXPOSE 5000
