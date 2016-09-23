@@ -39,6 +39,11 @@ if [[ -n ${DISABLED_ORIGIN} ]]; then
     fi
 fi
 
+# 添加信任url
+if [[ -n ${TRUSTED_DOMAINS} ]]; then
+    sudo -u ${OWN_CLOUD_USER} php occ config:system:set trusted_domains 1 --value=${TRUSTED_DOMAINS}
+fi
+
 
 # third apache port config
 if [[ -z ${OWN_CLOUD_PORT} ]]; then

@@ -12,6 +12,8 @@ docker build owncloud
     OWN_CLOUD_ADMIN：自定义管理员
     
     OWN_CLOUD_PASSWORD：自定义管理员密码
+    
+    TRUSTED_DOMAINS: 信任的url路径
 
 # 备注
     
