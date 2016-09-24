@@ -12,7 +12,7 @@ ENV RAW_PORT=5000 \
     OWN_CLOUD_USER="www-data"
 
 RUN echo "Asia/Shanghai" > /etc/timezone;dpkg-reconfigure -f noninteractive tzdata \
-    && sed -Ei '1,$s/http:\/\/archive.ubuntu.com\/ubuntu\//http:\/\/cn.archive.ubuntu.com\/ubuntu\//g' /etc/apt/sources.list \
+#    && sed -Ei '1,$s/http:\/\/archive.ubuntu.com\/ubuntu\//http:\/\/cn.archive.ubuntu.com\/ubuntu\//g' /etc/apt/sources.list \
     && apt-get update -q \
     && apt-get upgrade -y \
 

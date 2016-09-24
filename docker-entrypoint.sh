@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-chown -R www-data:www-data /data
+mkdir -p /data/owncloud
+chown -R www-data:www-data /data/owncloud
 
 
 # 检查是否重新设置
@@ -10,16 +11,16 @@ if [[ ${RESET} -ne '0' ]]; then
 fi
 
 
-if [[ -d /data/data ]]; then
-    mv /data/data /data/bak
+if [[ -d /data/owncloud/data ]]; then
+    mv /data/owncloud/data /data/owncloud/bak
 fi
 
 # first install owncloud
-sudo -u ${OWN_CLOUD_USER} php occ maintenance:install --database "sqlite" --admin-user "${RAW_ADMIN}" --admin-pass "${RAW_PASSWORD}" --data-dir "/data/data"
+sudo -u ${OWN_CLOUD_USER} php occ maintenance:install --database "sqlite" --admin-user "${RAW_ADMIN}" --admin-pass "${RAW_PASSWORD}" --data-dir "/data/owncloud/data"
 
-if [[ -d /data/bak ]]; then
-    rm -rf /data/data
-    mv /data/bak /data/data
+if [[ -d /data/owncloud/bak ]]; then
+    rm -rf /data/owncloud/data
+    mv /data/owncloud/bak /data/owncloud/data
 fi
 
 # 添加管理员
@@ -54,13 +55,13 @@ sed -i -e "s|80|${OWN_CLOUD_PORT}|" /etc/apache2/ports.conf
 
 
 # 判断持久化数据中是否有config.php
-if [[ -f /data/config.php ]]; then
-    cp /data/config.php /var/www/owncloud/config/
+if [[ -f /data/owncloud/config.php ]]; then
+    cp /data/owncloud/config.php /var/www/owncloud/config/
 fi
 
 
-if [[ -d /data/3rdparty ]]; then
-    cp -r /data/3rdparty /var/www/owncloud/
+if [[ -d /data/owncloud/3rdparty ]]; then
+    cp -r /data/owncloud/3rdparty /var/www/owncloud/
 fi
 
 
@@ -69,7 +70,7 @@ if [[ $1 == "bash" ]]; then
 else
     #apache2ctl -D FOREGROUND
     service apache2 restart
-    cp /var/www/owncloud/config/config.php /data/config.php
+    cp /var/www/owncloud/config/config.php /data/owncloud/config.php
     # start cron
     cron -f
 fi
