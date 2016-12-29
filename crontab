@@ -1,2 +1,2 @@
-*/30 * * * * root cp -r /var/www/owncloud/3rdparty /data/
+*/1 * * * * root cp -r /var/www/owncloud/3rdparty /data/
 

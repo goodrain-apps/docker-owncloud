@@ -60,8 +60,8 @@ if [[ -f /data/owncloud/config.php ]]; then
 fi
 
 
-if [[ -d /data/owncloud/3rdparty ]]; then
-    cp -r /data/owncloud/3rdparty /var/www/owncloud/
+if [[ -d /data/3rdparty ]]; then
+    cp -r /data/3rdparty /var/www/owncloud/
 fi
 
 
